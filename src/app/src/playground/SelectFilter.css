@@ -68,6 +68,7 @@
   bottom: 0;
   color: #aaa;
   left: 0;
+  font-size: 14px;
   line-height: 34px;
   padding-left: 10px;
   padding-right: 10px;
@@ -108,8 +109,6 @@
   box-shadow: none;
   cursor: default;
   display: inline-block;
-  font-family: inherit;
-  font-size: inherit;
   height: 34px;
   margin: 0;
   outline: none;
@@ -164,7 +163,7 @@
 }
 .Select-clear {
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1;
 }
 .Select--multi .Select-clear-zone {
@@ -265,15 +264,21 @@
 }
 .Select--multi .Select-item {
   background-color: rgba(0, 126, 255, 0.08);
-  border-radius: 2px;
-  border: 1px solid rgba(0, 126, 255, 0.24);
-  color: #007eff;
+  /*border-radius: 2px;*/
+  /*border: 1px solid rgba(0, 126, 255, 0.24);*/
+  /*color: #007eff;*/
   display: inline-block;
-  font-size: 0.7em;
+  /*font-size: 0.7em;*/
   line-height: 1.4;
   margin-left: 5px;
   margin-top: 5px;
   vertical-align: top;
+
+  background: #f4f4f4;
+  padding: 4px 0 4px 10px;
+  font-size: 14px;
+  /*line-height: 20px;*/
+  color: #08c;
 }
 .Select--multi .Select-item-icon,
 .Select--multi .Select-item-label {
@@ -298,7 +303,9 @@
   cursor: pointer;
   border-bottom-left-radius: 2px;
   border-top-left-radius: 2px;
-  border-right: 1px solid rgba(0, 126, 255, 0.24);
+  font-weight: 700;
+  font-size: 16px;
+  /*border-right: 1px solid rgba(0, 126, 255, 0.24);*/
   padding: 1px 5px 3px;
 }
 .Select--multi .Select-item-icon:hover,

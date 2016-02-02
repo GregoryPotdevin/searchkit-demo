@@ -82,10 +82,9 @@ export class PlaygroundApp extends React.Component<any, any> {
               <HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true} interval={2}/>
               <RangeFilter min={0} max={10} field="imdbRating" id="imdbRating" title="IMDB Rating" showHistogram={true}/>
-              {/*<RefinementListFilter id="actors" title="Actors" field="actors.raw" operator="AND" size={10}/>*/}
-              <SelectFilter id="actors" title="Actors" field="actors.raw" operator="AND" size={100}/>
+              <RefinementListFilter id="actors" title="Actors" field="actors.raw" operator="AND" size={10}/>
               <RefinementListFilter translations={{ "facets.view_more": "View more writers" }} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
-              <RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
+              <SelectFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={100}/>
               <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
                 { title: "All" },
                 { title: "up to 20", from: 0, to: 20 },
