@@ -56,13 +56,17 @@ export default class CheckboxFilter extends SearchkitComponent<CheckboxFilterPro
 
      const selected = this.accessor.state.contains(value)
 
+     const key = value.toLowerCase();
+     var option = this.accessor.getBuckets().find(v => v.key === key);
+     const count = option ? option.doc_count : 0;
+
     return (
       <div data-qa={`filter--${this.props.id}`} className={className}>
         <div data-qa="header" className={block("header")}>{title}</div>
         <div data-qa="options" className={block("options")}>
            <FilterCheckboxItemComponent
              label={label}
-             count={1}
+             count={count}
              selected={selected}
              translate={this.translate.bind(this)}
              bemBlocks={this.bemBlocks}
