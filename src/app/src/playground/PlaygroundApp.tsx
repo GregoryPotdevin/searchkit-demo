@@ -22,6 +22,7 @@ RangeFilter
 
 import "./../../styles/customisations.scss";
 import SelectFilter from './SelectFilter';
+import SelectBoxFilter from './SelectBoxFilter';
 
 class MovieHits extends Hits {
   renderResult(result: any) {
@@ -56,6 +57,7 @@ export class PlaygroundApp extends React.Component<any, any> {
 
   render() {
 
+              // <SelectBoxFilter id="actors" title="Actors" field="actors.raw" operator="AND" size={100}/>
     return (
       <div>
       <SearchkitProvider searchkit={this.searchkit}>

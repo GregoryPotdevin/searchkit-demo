@@ -5,15 +5,14 @@ import {
   FacetAccessor
 } from "searchkit"
 
-const Select = require('react-select');
-require('./SelectFilter.css')
+const CustomSelect = require('react-select-box');
+require('./SelectBoxFilter.css')
 
-
-export default class SelectFilter extends SearchkitComponent<any, any> {
+export default class SelectBoxFilter extends SearchkitComponent<any, any> {
   accessor: FacetAccessor
 
   defaultProps={
-    size: 200
+    size: 50
   }
 
   defineAccessor() {
@@ -31,8 +30,8 @@ export default class SelectFilter extends SearchkitComponent<any, any> {
     }
   }
 
-  handleChange(value, selectedOptions) {
-    this.accessor.state = this.accessor.state.setValue(selectedOptions.map(o => o.value));
+  handleChange(event) {
+    this.accessor.state = this.accessor.state.setValue(event.slice());
     this.searchkit.performSearch();
   }
 
@@ -53,32 +52,29 @@ export default class SelectFilter extends SearchkitComponent<any, any> {
     return (
       <option className={className} value={label} key={key}>
         {label} {count ? '(' + count + ')' : null}
-      </option>
+        </option>
     )
   }
 
   render() {
     var block = this.bemBlocks.container
     var className = block().mix(`filter--${this.props.id}`)
-    const buckets = this.accessor.getBuckets().slice()
-    buckets.sort(function(a, b){
-      if(a.key < b.key) return -1;
-      if(a.key > b.key) return 1;
-      return 0;
-    });
-    if (buckets.length == 0) return null;
+    let isAllChecked = () => {
+      return !this.accessor.state.getValue() || this.accessor.state.getValue().length == 0
+    }
 
-    const options = buckets.map((v) => ({ value: v.key, label: v.key + ' (' + v.doc_count + ') '}))
     return (
       <div className={className}>
         <div className={block("header") }>{this.props.title}</div>
-
-        <Select multi simpleValue disabled={false} value={this.accessor.state.getValue()}
-                placeholder="Select your favourite(s)"
-                options={options}
-                onChange={this.handleChange.bind(this)} />
-
-
+        <CustomSelect
+          className={block("options") }
+          label={this.props.label}
+          value={this.accessor.state.getValue() }
+          onChange={this.handleChange.bind(this) }
+          multiple={true}>
+          {/* this.renderOption("All", null, isAllChecked()) */}
+          {_.map(this.accessor.getBuckets(), this.createOption.bind(this)) }
+          </CustomSelect>
         </div>
     );
   }
