@@ -275,8 +275,8 @@
   vertical-align: top;
 
   background: #f4f4f4;
-  padding: 4px 0 4px 10px;
-  font-size: 14px;
+  /*padding: 4px 0 4px 10px;*/
+  font-size: 12px;
   /*line-height: 20px;*/
   color: #08c;
 }
@@ -304,7 +304,7 @@
   border-bottom-left-radius: 2px;
   border-top-left-radius: 2px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   /*border-right: 1px solid rgba(0, 126, 255, 0.24);*/
   padding: 1px 5px 3px;
 }

@@ -21,24 +21,22 @@ RangeFilter
 } from "searchkit";
 
 import "./../../styles/customisations.scss";
-import SelectFilter from './SelectFilter';
-import SelectBoxFilter from './SelectBoxFilter';
+import MultiSelectFilter from './MultiSelectFilter/MultiSelectFilter';
 
-class MovieHits extends Hits {
-  renderResult(result: any) {
-    let url = "http://www.imdb.com/title/" + result._source.imdbId
-    return (
-      <div className={this.bemBlocks.item().mix(this.bemBlocks.container("item")) } key={result._id}>
-        <a href={url} target="_blank">
-          <img className={this.bemBlocks.item("poster") } src={result._source.poster} width="170" height="240"/>
-          </a>
-        <a href={url} target="_blank">
-          <div className={this.bemBlocks.item("title") } dangerouslySetInnerHTML={{ __html: _.get(result, "highlight.title", false) || result._source.title }}>
-            </div>
-          </a>
+const MovieHit = (props) =>  {
+  const { bemBlocks, result } = props
+  let url = "http://www.imdb.com/title/" + result._source.imdbId
+  return (
+    <div className={bemBlocks.item().mix(bemBlocks.container("item")) } key={result._id}>
+      <a href={url} target="_blank">
+        <img className={bemBlocks.item("poster") } src={result._source.poster} width="170" height="240"/>
+      </a>
+      <a href={url} target="_blank">
+        <div className={bemBlocks.item("title") } dangerouslySetInnerHTML={{ __html: _.get(result, "highlight.title", false) || result._source.title }}>
         </div>
-    )
-  }
+      </a>
+    </div>
+  )
 }
 
 
@@ -56,8 +54,6 @@ export class PlaygroundApp extends React.Component<any, any> {
   }
 
   render() {
-
-              // <SelectBoxFilter id="actors" title="Actors" field="actors.raw" operator="AND" size={100}/>
     return (
       <div>
       <SearchkitProvider searchkit={this.searchkit}>
@@ -84,7 +80,7 @@ export class PlaygroundApp extends React.Component<any, any> {
               <RangeFilter min={0} max={10} field="imdbRating" id="imdbRating" title="IMDB Rating" showHistogram={true}/>
               <RefinementListFilter id="actors" title="Actors" field="actors.raw" operator="AND" size={10}/>
               <RefinementListFilter translations={{ "facets.view_more": "View more writers" }} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
-              <SelectFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={100}/>
+              <MultiSelectFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={100}/>
               <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
                 { title: "All" },
                 { title: "up to 20", from: 0, to: 20 },
@@ -112,7 +108,7 @@ export class PlaygroundApp extends React.Component<any, any> {
                   </div>
 
                 </div>
-              <MovieHits hitsPerPage={12} highlightFields={["title"]}/>
+              <Hits hitsPerPage={12} highlightFields={["title"]} itemComponent={MovieHit}/>
               <NoHits suggestionsField={"title"}/>
               <Pagination showNumbers={true} />
               </div>
