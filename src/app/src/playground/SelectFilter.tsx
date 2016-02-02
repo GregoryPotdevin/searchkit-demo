@@ -8,15 +8,17 @@ import {
 const CustomSelect = require('react-select-box');
 require('./SelectFilter.css')
 
-
 export default class SelectFilter extends SearchkitComponent<any, any> {
   accessor: FacetAccessor
 
+  defaultProps={
+    size: 50
+  }
+
   defineAccessor() {
-    return new FacetAccessor(this.props.field, {
-      id: this.props.id, operator: this.props.operator,
-      title: this.props.title, size: (this.props.size || 50),
-      translations: this.props.translations
+    const { field, id, operator, title, size, translations } = this.props;
+    return new FacetAccessor(field, {
+      id, operator, title, size, translations
     })
   }
 
@@ -29,10 +31,7 @@ export default class SelectFilter extends SearchkitComponent<any, any> {
   }
 
   handleChange(event) {
-    this.accessor.state = this.accessor.state.clear();
-    _.map(event, function(option) {
-      this.accessor.state = this.accessor.state.add(option);
-    }, this);
+    this.accessor.state = this.accessor.state.setValue(event.slice());
     this.searchkit.performSearch();
   }
 
