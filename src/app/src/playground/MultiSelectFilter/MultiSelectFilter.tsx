@@ -60,8 +60,12 @@ export default class MultiSelectFilter extends SearchkitComponent<any, any> {
 
   render() {
     var block = this.bemBlocks.container
-    var className = block().mix(`filter--${this.props.id}`)
     const buckets = this.accessor.getBuckets().slice()
+    var className = block()
+      .mix(`filter--${this.props.id}`)
+      .state({
+        disabled: buckets.length == 0
+      })
     _.sortBy(buckets, 'key')
 
     const options = buckets.map((v) => ({ value: v.key, label: v.key + ' (' + v.doc_count + ') '}))
