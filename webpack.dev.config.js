@@ -19,7 +19,8 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      react: path.resolve('./node_modules/react')
+      react: path.resolve('./node_modules/react'),
+      'react-select-box': path.resolve('./node_modules/react-select-box')
     },
     extensions:[".js", ".ts", ".tsx","", ".webpack.js", ".web.js"],
     fallback: path.join(__dirname, "node_modules")
